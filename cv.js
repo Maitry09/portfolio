@@ -113,14 +113,30 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
-const animateElements = document.querySelectorAll('.project-card, .skill-category, .about-content, .contact-content');
-animateElements.forEach(el => {
+// Observe elements for animation - only apply to project cards and skill categories
+const projectCards = document.querySelectorAll('.project-card');
+const skillCategories = document.querySelectorAll('.skill-category');
+
+projectCards.forEach((el, index) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'all 0.6s ease';
     observer.observe(el);
 });
+
+skillCategories.forEach((el, index) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'all 0.6s ease';
+    observer.observe(el);
+});
+
+// Observe about and contact content without hiding them initially
+const aboutContent = document.querySelector('.about-content');
+const contactContent = document.querySelector('.contact-content');
+
+if (aboutContent) observer.observe(aboutContent);
+if (contactContent) observer.observe(contactContent);
 
 // ===================================
 // HERO STATS COUNTER ANIMATION
