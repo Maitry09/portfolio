@@ -73,7 +73,21 @@ function updateActiveNavLink() {
         }
     });
 }
-
+const roleEl = document.getElementById('roleText');
+let ri = 0, ci = 0, deleting = false;
+function typeRole() {
+  const word = roles[ri];
+  if (!deleting) {
+    if (roleEl) roleEl.textContent = word.slice(0, ++ci);
+    if (ci === word.length) { deleting = true; setTimeout(typeRole, 1800); return; }
+    setTimeout(typeRole, 70);
+  } else {
+    if (roleEl) roleEl.textContent = word.slice(0, --ci);
+    if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; setTimeout(typeRole, 300); return; }
+    setTimeout(typeRole, 35);
+  }
+}
+setTimeout(typeRole, 1200);
 // ===================================
 // SCROLL ANIMATIONS
 // ===================================
@@ -198,30 +212,6 @@ if (heroSection) {
 }
 
 // ===================================
-// TYPING EFFECT FOR HERO SUBTITLE
-// ===================================
-
-const heroSubtitle = document.querySelector('.hero-subtitle');
-if (heroSubtitle) {
-    const originalText = heroSubtitle.textContent;
-    heroSubtitle.textContent = '';
-    
-    let charIndex = 0;
-    const typingSpeed = 50;
-    
-    setTimeout(() => {
-        const typeWriter = setInterval(() => {
-            if (charIndex < originalText.length) {
-                heroSubtitle.textContent += originalText.charAt(charIndex);
-                charIndex++;
-            } else {
-                clearInterval(typeWriter);
-            }
-        }, typingSpeed);
-    }, 1000);
-}
-
-// ===================================
 // CONTACT METHODS - ENHANCED INTERACTIONS
 // ===================================
 
@@ -326,32 +316,6 @@ function showNotification(message) {
         notification.remove();
     }, 3000);
 }
-
-// ===================================
-// PROJECT CARD ENHANCED HOVER EFFECTS
-// ===================================
-
-const projectCards = document.querySelectorAll('.project-card');
-
-projectCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-    });
-});
 
 // ===================================
 // SKILL TAGS WAVE ANIMATION
@@ -526,6 +490,19 @@ document.addEventListener('keydown', (e) => {
         }, 5000);
     }
 });
+
+
+const roles = [
+  'intelligent web apps',
+  'ML-powered APIs',
+  'MERN applications',
+  'data pipelines',
+  'AI-driven features',
+  'React interfaces',
+  'neural networks'
+];
+
+
 
 // ===================================
 // PERFORMANCE OPTIMIZATION
