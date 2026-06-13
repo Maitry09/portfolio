@@ -579,13 +579,6 @@ section {
     z-index: 2;
 }
 
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-bottom: 1.2rem;
-}
-
 .tag {
     padding: 0.4rem 1rem;
     background: rgba(99, 102, 241, 0.15);
@@ -1501,13 +1494,6 @@ section {
     padding: 1.4rem;
     position: relative;
     z-index: 2;
-}
-
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-bottom: 1.2rem;
 }
 
 .tag {
